@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+
+    <style>
+        
+        body {
+            width : 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .container {
+            background-color: white;
+            width : 50%;
+            padding: 20px;
+            
+        }
+    </style>
+</head>
+<body>
+   <div class="container">
+
+    <h1>This a message Title</h1>
+
+   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis ex temporibus ipsam impedit repudiandae. Inventore quas minus fuga ad aperiam.</p>
+   <button id="close-btn">close</button>
+   </div>
+
+   <script>
+
+       const closeBtn = document.getElementById("close-btn");
+       closeBtn.addEventListener("click"  , ()=>{
+           window.electron.close()
+
+       });
+   </script>
+</body>
+</html>
