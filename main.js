@@ -1,5 +1,11 @@
 const { app, BrowserWindow, screen, ipcMain , Tray  , dialog, Menu} = require("electron");
 const path = require("path");
+const express = require("express");
+const kill = require('kill-port')
+
+
+let ex = express();
+
 let win;
 let tray = null
 function createWindow() {
@@ -32,30 +38,47 @@ function createWindow() {
    // win.setVisibleOnAllWorkspaces(true);
     win.setFullScreenable(false);
   }
-
-  const express = require("express");
-
-  var http = require("http");
-
-  let ex = express();
-
-  let server = ex.listen(80, "0.0.0.0");
+ 
+  let server = ex.listen(8080);
 
   ex.all("/trigger", function (req, res) {
-    res.send("Server is ready!");
-    win.maximize();
-
     win.show();
+    win.focus();
+    win.maximize();
+    res.send("Server is ready!");
+  
+
+   
   });
+
+
+  // const port = 80;
+  // kill(port, 'tcp')
+  // .then((re)=>{
+  //   // let server = ex.listen(80, "0.0.0.0");
+
+  //   // ex.all("/trigger", function (req, res) {
+  //   //   res.send("Server is ready!");
+  //   //   win.maximize();
+  
+  //   //   win.show();
+  //   // });
+  //   console.log(re)
+  // })
+  // .catch(console.log)
+
+
+ 
+
+ 
 }
 
 app.whenReady().then(() => {
   createWindow();
-  var myip = require('quick-local-ip');
 
-//getting ip4 network address of local system
-const ip = myip.getLocalIP4();
-console.log("🚀 ~ file: main.js:57 ~ app.whenReady ~ ip", ip);
+// //getting ip4 network address of local system
+// const ip = require('ip').address() // my ip address;
+// console.log("🚀 ~ file: main.js:57 ~ app.whenReady ~ ip", ip);
 
 
 
@@ -76,30 +99,8 @@ app.whenReady().then(() => {
 
 
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'Show Local IP address ', 
+    
   
-  click : ()=>{
-    const options = {
-      type: 'info',
-      buttons: ['Cancel'],
-      defaultId: 2,
-      title: 'IP address',
-      message: 'your IP address is : '+ ip,
-      
-      
-    };
-    const dummyWin = new BrowserWindow({
-      show: false,
-      alwaysOnTop: true,
-      opacity  :0,
-    });
-  
-    dialog.showMessageBox( dummyWin, options).then(((response, checkboxChecked) => {
-      console.log("response");
-       dummyWin.hide();
-    }));
-  }
-  },
   { role: 'hide' ,label : "Hide"  },
   { type: 'separator' },
     { role: 'quit' ,label : "Quit"  }
