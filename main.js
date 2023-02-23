@@ -50,6 +50,12 @@ function createWindow() {
     win.maximize();
     win.setAlwaysOnTop(false)
     res.send("Server is ready!");
+
+
+    setTimeout(()=>{
+
+      win.hide();
+    } , 10000);
   
 
    
