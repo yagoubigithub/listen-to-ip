@@ -12,6 +12,7 @@ function createWindow() {
    win = new BrowserWindow({
     show: false,
     //  alwaysOnTop : true,
+    opacity  : 0.5,
     frame: false,
     transparent: true,
     skipTaskbar: true,
@@ -23,6 +24,7 @@ function createWindow() {
   });
 
   win.loadFile("index.html");
+  win.hide();
   const display = screen.getPrimaryDisplay();
   
   if (process.platform == "darwin") {
@@ -43,8 +45,10 @@ function createWindow() {
 
   ex.all("/trigger", function (req, res) {
     win.show();
+    win.setAlwaysOnTop(true)
     win.focus();
     win.maximize();
+    win.setAlwaysOnTop(false)
     res.send("Server is ready!");
   
 
