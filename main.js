@@ -12,10 +12,13 @@ function createWindow() {
    win = new BrowserWindow({
     show: false,
     //  alwaysOnTop : true,
-    opacity  : 0.5,
+   // opacity  : 0.5,
+   backgroundColor :  "rgba(0,0,0,0.3)",
     frame: false,
     transparent: true,
     skipTaskbar: true,
+    height : 600,
+    width : 800,
     disableAutoHideCursor: true,
 
     webPreferences: {
@@ -25,21 +28,21 @@ function createWindow() {
 
   win.loadFile("index.html");
   win.hide();
-  const display = screen.getPrimaryDisplay();
+  // const display = screen.getPrimaryDisplay();
   
-  if (process.platform == "darwin") {
-    win.setResizable(true);
-    win.setSize(display.bounds.width, display.bounds.height);
-    win.setResizable(false);
-    win.setPosition(display.bounds.x, display.bounds.y);
-  //  win.setAlwaysOnTop(true, "main-menu", 1);
-  } else {
-   // win.setAlwaysOnTop(true, "screen");
-    win.setSize(display.bounds.width, display.bounds.height);
-    win.setPosition(display.bounds.x, display.bounds.y);
-   // win.setVisibleOnAllWorkspaces(true);
-    win.setFullScreenable(false);
-  }
+  // if (process.platform == "darwin") {
+  //   win.setResizable(true);
+  //   win.setSize(display.bounds.width, display.bounds.height);
+  //   win.setResizable(false);
+  //   win.setPosition(display.bounds.x, display.bounds.y);
+  // //  win.setAlwaysOnTop(true, "main-menu", 1);
+  // } else {
+  //  // win.setAlwaysOnTop(true, "screen");
+  //   win.setSize(display.bounds.width, display.bounds.height);
+  //   win.setPosition(display.bounds.x, display.bounds.y);
+  //  // win.setVisibleOnAllWorkspaces(true);
+  //   win.setFullScreenable(false);
+  // }
  
   let server = ex.listen(8080);
 
@@ -47,7 +50,7 @@ function createWindow() {
     win.show();
     win.setAlwaysOnTop(true)
     win.focus();
-    win.maximize();
+    //win.maximize();
     win.setAlwaysOnTop(false)
     res.send("Server is ready!");
 
